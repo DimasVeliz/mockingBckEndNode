@@ -67,7 +67,6 @@ app.use(express.static(path.join(__dirname,'public')))
 // Registering Routes
 app.use('/',require('./routes/index'))
 app.use('/auth',require('./routes/auth'))
-app.use('/testPost',require('./routes/enteringData'))
 
 
 
