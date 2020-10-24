@@ -17,7 +17,7 @@ router.get(
 router.get(
     '/dashboard', ensureAuth,(req,resp)=>{
         
-        resp.render('dashboard',{
+        resp.send({
             name:req.user.firstName,
             foto:req.user.image
         })

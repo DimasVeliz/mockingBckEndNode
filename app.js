@@ -9,8 +9,6 @@ const session =require('express-session')
 const MongoStore= require('connect-mongo')(session)
 const bodyParser = require('body-parser');
 const cors = require('cors');
-//below sort of front end but we dont need that
-const exphds= require('express-handlebars')
 
 
 
@@ -41,9 +39,6 @@ if (process.env.NODE_ENV=='development') {
     app.use(morgan('dev'))
 }
 
-//adding the handlebars middleware for the front end(we wont need it)
-app.engine('.hbs',exphds({defaultlayout:'main',extname:'.hbs'}));
-app.set('view engine','.hbs')
 
 
 //Express Session Middleware
@@ -67,6 +62,8 @@ app.use(express.static(path.join(__dirname,'public')))
 // Registering Routes
 app.use('/',require('./routes/index'))
 app.use('/auth',require('./routes/auth'))
+app.use('/users', require('./routes/UserController'));
+app.use('/api/auth', require('./routes/AuthController'));
 
 
 

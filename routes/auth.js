@@ -14,6 +14,7 @@ router.get('/google',passport.authenticate('google', {scope:['profile']}))
 router.get(
     '/google/callback', 
     passport.authenticate('google',{failureRedirect:'/'}), (req,res)=>{
+        console.log(req.user)
         res.redirect('/dashboard')
     })
 
@@ -22,7 +23,7 @@ router.get(
 router.get(
     '/logout', (req,res)=>{
         req.logOut()
-        res.redirect('/')
+        res.status(200).send("you're logged out now")
     })
 
 module.exports= router

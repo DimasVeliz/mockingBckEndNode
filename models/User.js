@@ -2,12 +2,12 @@ const mongoose= require('mongoose')
 
 const UserSchema= new mongoose.Schema({
     googleId:{
-        type:String,
-        required:true
+        type:String
+        
     },
     displayName:{
-        type:String,
-        required:true
+        type:String
+        
     },
     firstName:{
         type:String,
@@ -23,6 +23,18 @@ const UserSchema= new mongoose.Schema({
     createdAt:{
         type:Date,
         default:Date.now
+    },
+    name:{
+        type:String
+        
+    },
+    email:{
+        type:String
+        
+    },
+    password:{type:String
+        
+
     }
 })
 
