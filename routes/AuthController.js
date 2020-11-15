@@ -14,7 +14,7 @@ router.post('/register', async(req, res) =>{
   
     var hashedPassword = bcrypt.hashSync(req.body.password, 8);
     
-    await User.create({
+    await Usuario.create({
       name : req.body.name,
       email : req.body.email,
       password : hashedPassword
@@ -31,7 +31,7 @@ router.post('/register', async(req, res) =>{
 
   router.get('/me', VerifyToken, (req, res, next) =>{
 
-    User.findById(req.userId, { password: 0 },  (err, user)=> {
+    Usuario.findById(req.userId, { password: 0 },  (err, user)=> {
       if (err) return res.status(500).send("There was a problem finding the user.");
       if (!user) return res.status(404).send("No user found.");
       s      
@@ -42,7 +42,7 @@ router.post('/register', async(req, res) =>{
 
   router.post('/login', (req, res)=> {
 
-    User.findOne({ email: req.body.email },  (err, user) =>{
+    Usuario.findOne({ email: req.body.email },  (err, user) =>{
       if (err) return res.status(500).send('Error on the server.');
       if (!user) return res.status(404).send('No user found.');
       
