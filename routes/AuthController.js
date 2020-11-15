@@ -6,7 +6,7 @@ router.use(bodyParser.json());
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var VerifyToken = require('../middleware/VerifyToken');
-const User= require('../models/User')
+const Usuario= require('../models/Usuario')
 
 
 

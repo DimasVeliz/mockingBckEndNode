@@ -5,8 +5,6 @@ const connectDB= require('./config/db')
 const path = require('path')
 const morgan = require('morgan')
 const passport = require('passport')
-const session =require('express-session')
-const MongoStore= require('connect-mongo')(session)
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -41,16 +39,6 @@ if (process.env.NODE_ENV=='development') {
 
 
 
-//Express Session Middleware
-app.use(session({
-    secret:'Looking Good this backEnd',
-    resave:false,
-    saveUninitialized:false,
-    store:new MongoStore({mongooseConnection:mongoose.connection})
-
-}))
-
-
 //passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
@@ -60,9 +48,7 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname,'public')))
 
 // Registering Routes
-app.use('/',require('./routes/index'))
-app.use('/auth',require('./routes/auth'))
-app.use('/users', require('./routes/UserController'));
+app.use('/api/authexternal',require('./routes/ExternalAuthController'))
 app.use('/api/auth', require('./routes/AuthController'));
 
 
