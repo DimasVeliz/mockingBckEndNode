@@ -1,21 +1,21 @@
 var nodemailer = require('nodemailer');
 var baseUrl="http://localhost:3001/frontend";
 
-var transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'dveliz900@gmail.com',
-    pass: 'cvobcycljfunawav'
+    user: SCOUTEA_SENDER_EMAIL_ADDRESS,
+    pass: SCOUTEA_SENDER_EMAIL_ADDRESS_PASSWORD
   }
 });
 
 
 
 
-var myInternalService= (email,token)=>{
+const myInternalService= (email,token)=>{
 
-    var mailParams = {
-        from: 'dveliz900@gmail.com',
+    let mailParams = {
+        from: SCOUTEA_SENDER_EMAIL_ADDRESS,
         to: email,
         subject: 'Sending Email using Node.js',
         text: 'That was easy!',

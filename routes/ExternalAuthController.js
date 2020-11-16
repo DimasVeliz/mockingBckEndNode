@@ -14,8 +14,18 @@ router.get('/google',passport.authenticate('google', {scope:['profile']}))
 router.get(
     '/google/callback', 
     passport.authenticate('google',{failureRedirect:'/'}), (req,res)=>{
-        console.log(req.user)
-        res.redirect('/dashboard')
+     
+     let user=req.user
+      // create a token
+      var token = jwt.sign({ id: user._id }, process.env.SECRET, {
+        expiresIn: 86400 // expires in 24 hours
+      });
+      var tokenToEmail = jwt.sign({ id: user._id }, process.env.SECRET, {
+        expiresIn: 600 // expires in 10 minutes
+      });
+      EmailSender(req.body.email,tokenToEmail);
+      
+      res.status(200).send({ auth: true, token: token });
     })
 
 //@desc Logout user
