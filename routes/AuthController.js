@@ -7,7 +7,7 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var VerifyToken = require('../middleware/VerifyToken');
 const Usuario= require('../models/Usuario')
-
+const EmailSender= require('./EmailSender')
 
 
 router.post('/register', async(req, res) =>{
@@ -25,20 +25,16 @@ router.post('/register', async(req, res) =>{
       var token = jwt.sign({ id: user._id }, process.env.SECRET, {
         expiresIn: 86400 // expires in 24 hours
       });
+      var tokenToEmail = jwt.sign({ id: user._id }, process.env.SECRET, {
+        expiresIn: 600 // expires in 10 minutes
+      });
+      EmailSender(req.body.email,tokenToEmail);
+      
       res.status(200).send({ auth: true, token: token });
     }); 
   });
 
-  router.get('/me', VerifyToken, (req, res, next) =>{
-
-    Usuario.findById(req.userId, { password: 0 },  (err, user)=> {
-      if (err) return res.status(500).send("There was a problem finding the user.");
-      if (!user) return res.status(404).send("No user found.");
-      s      
-      res.status(200).send(user);
-    });
-    
-  });
+  
 
   router.post('/login', (req, res)=> {
 

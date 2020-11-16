@@ -50,6 +50,8 @@ app.use(express.static(path.join(__dirname,'public')))
 // Registering Routes
 app.use('/api/authexternal',require('./routes/ExternalAuthController'))
 app.use('/api/auth', require('./routes/AuthController'));
+app.use('/api/email', require('./routes/EmailController'));
+
 
 
 
