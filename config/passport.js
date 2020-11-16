@@ -11,7 +11,7 @@ module.exports= function(passport){
     async (accessToken, refreshToken,profile,done)=>{
         const newUser={
             email:profile.emails[0],
-            password=null
+            password:null
         }
         try {
 
