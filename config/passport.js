@@ -9,9 +9,14 @@ module.exports= function(passport){
         callbackURL:'/auth/google/callback'
     },
     async (accessToken, refreshToken,profile,done)=>{
+        
         const newUser={
-            email:profile.emails[0],
-            password:null
+            displayName:profile.displayName,
+            email:null,
+            password:null,
+            roleId:-1,
+            registeredFromSocialMedia:true,
+            isConfirmed:true
         }
         try {
 

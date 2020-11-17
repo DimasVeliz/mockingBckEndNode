@@ -1,11 +1,14 @@
 var nodemailer = require('nodemailer');
 var baseUrl="http://localhost:3001/frontend";
 
+
+const SENDER_EMAIL_ADDRESS=process.env.SCOUTEA_SENDER_EMAIL_ADDRESS
+const SENDER_EMAIL_ADDRESS_PASSWORD=process.env.SCOUTEA_SENDER_EMAIL_ADDRESS_PASSWORD
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: SCOUTEA_SENDER_EMAIL_ADDRESS,
-    pass: SCOUTEA_SENDER_EMAIL_ADDRESS_PASSWORD
+    user: SENDER_EMAIL_ADDRESS,
+    pass: SENDER_EMAIL_ADDRESS_PASSWORD
   }
 });
 
@@ -15,7 +18,7 @@ const transporter = nodemailer.createTransport({
 const myInternalService= (email,token)=>{
 
     let mailParams = {
-        from: SCOUTEA_SENDER_EMAIL_ADDRESS,
+        from: SENDER_EMAIL_ADDRESS,
         to: email,
         subject: 'Sending Email using Node.js',
         text: 'That was easy!',

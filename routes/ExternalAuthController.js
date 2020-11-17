@@ -1,5 +1,7 @@
 const express= require('express')
 const passport = require('passport')
+const jwt = require('jsonwebtoken');
+const EmailSender= require('./EmailSender')
 
 const router= express.Router()
 
@@ -20,10 +22,7 @@ router.get(
       var token = jwt.sign({ id: user._id }, process.env.SECRET, {
         expiresIn: 86400 // expires in 24 hours
       });
-      var tokenToEmail = jwt.sign({ id: user._id }, process.env.SECRET, {
-        expiresIn: 600 // expires in 10 minutes
-      });
-      EmailSender(req.body.email,tokenToEmail);
+      
       
       res.status(200).send({ auth: true, token: token });
     })
