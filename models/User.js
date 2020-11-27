@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UsuarioSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     
     displayName:{
         type: String
@@ -16,9 +16,8 @@ const UsuarioSchema = new mongoose.Schema({
         type: Boolean
 
     },
-    registeredFromSocialMedia: {
-        type: Boolean
-
+    oauthInfo: {
+        type: Object
     },
     createdAt: {
         type: Date,
@@ -29,4 +28,4 @@ const UsuarioSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Usuario', UsuarioSchema)
+module.exports = mongoose.model('User', UserSchema)
